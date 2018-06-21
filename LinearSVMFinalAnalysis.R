@@ -76,7 +76,7 @@ dfInteractionWeightsAbsVal = data.frame(Features = row.names(interaction.weights
 dfInteractionWeightsAbsVal = dfInteractionWeightsAbsVal[order(-dfInteractionWeightsAbsVal$WeightsAbsVal),]
 dfInteractionWeightsAbsVal$Features = gsub("X.", "", dfInteractionWeightsAbsVal$Features)
 write.csv(dfInteractionWeightsAbsVal, file = "results/10PercentRemoval/interaction.weights.abs.valinteraction.weights.8020Split.csv")
-
+cat("finished!", "\n")
 
 
 

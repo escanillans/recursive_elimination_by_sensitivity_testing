@@ -15,7 +15,6 @@ file = read.csv("data/cleanData/final_data.csv")
 
 # set parameters
 algorithm = "RFEST"
-numFolds = 10
 percents = c(10)
 seeds = c(1)
 
@@ -30,34 +29,7 @@ for(seed in seeds)
 
 		source("functions.R")
 
-		# perform 10 fold cv
-		models = Main(file, numFolds, percents[j], algorithm, seed)
-
-		################# Compute Cross-Validated AUC ################# 
-
-		# 1) Determine the average AUC and average AUC before breaking loop
-		avgAUC = mean(models$AUCs)
-    	avgAUC_before_break = mean(models$AUCs_before_break)
-		cat("Final avg AUC: ", avgAUC, "\n")
-		cat("Final highest avg AUC (before breaking) on tuning: ", avgAUC_before_break, "\n")
-
-		stats = data.frame(avgAUC, mean(models$RunTimes))
-		write.csv(stats, file = paste("results/", percents[j], "PercentRemoval/resultsOnData", 
-			algorithm, "8020SplitSeed", seed, ".csv", sep = ""))
-
-		# Save the list of AUCs
-		write.csv(models$AUCs, file = paste("results/", percents[j], "PercentRemoval/aucForEachModel", 
-			algorithm, "8020SplitSeed", seed, ".csv", sep = ""))
-
-		# Save the list of run times
-		write.csv(models$RunTimes, file = paste("results/", percents[j], "PercentRemoval/runTimeForEachModel", 
-			algorithm, "8020SplitSeed", seed, ".csv", sep = ""))
-		
-		# Save list of AUCs (on tuning) before breaking loop
-		write.csv(models$AUCs_before_break, file = paste("results/", percents[j], "PercentRemoval/highest_aucForEachModel", 
-		                                   algorithm, "8020SplitSeed", seed, ".csv", sep = ""))
-		
-		################# Determine final feature set ################# 
+		################# Find subset of relevant features to learning task ################# 
 		# Run RFEST on train and tune...final features are whatever is at the end when AUC drops
 		cat("Determining best set of features to retain...", "\n")
 		fsResults = fsAnalysis(file, percents[j], algorithm, seed)
