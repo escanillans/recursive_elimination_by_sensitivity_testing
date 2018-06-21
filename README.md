@@ -13,8 +13,9 @@ RFEST can be summarized by the following steps:
 3. Remove a percent of those feature(s) based on the computed importance.
 4. Repeat until the stopping criterion is met.
 
-To begin, run *MainProgram.R* [source("MainProgram.R")]. To test how well the algorithm performed, we will compute a 10-fold cross validation (CV) using only the features returned by RFEST. Open python notebook *roc_curves.ipynb*. This notebook will perform 10-fold CV on two different algorithms:
+To begin, run *MainProgram.R* [source("MainProgram.R")]. To test how well the algorithm performed, we will compute a 10-fold cross validation (CV) using only the features returned by RFEST. Open python notebook *roc_curves.ipynb*. This notebook will perform 10-fold CV on three different algorithms:
 1. Linear SVM built using your whole dataset.
+2. RBF SVM built using your whole dataset.
 2. Non-linear SVM (default is an RBF kernel) built using the subset of features returned by RFEST.
 
 Parameters you can adjust:
@@ -33,20 +34,20 @@ What is outputted when you run *roc_curves.ipynb*:
 3. F1-Score for each model (from 10-fold CV).
 
 Data Provided:
-I have provided a dataset based on the Correlation Immune (CI) function of order two, known as the parity function. Visit the link at the bottom to read more on CI functions.
+I have provided a dataset based on the Correlation Immune (CI) function of order two, known as the parity function. The dataset contains 50 features and 1000 instances. Two randomly chosen features were used to create the class label. 
 
-The dataset contains 50 features and 1000 instances. Two randomly chosen features were used to create the class label. The goal is to see whether RFEST can detect what those features are. The results in the Python notebook shows the features and the CV results.
+The goal is to see whether RFEST can detect what those features are. The results in the Python notebook shows the features and the CV results. Visit the link at the bottom to read more on CI functions.
 
 Notes:
 - No extra tuning is done before the algorithm runs. Default parameters for the machine learning algorithms have been used. This can be changed accordingly.
 - RFEST is a generalized feature selection algorithm. Meaning that one can, in practice, use any machine learning algorithm for evaluating feature relevance (refer to paper for more details). 
-- Before selecting your machine learning algorithm, it would be wise to run a set of general machine learning methods such as the following: decision tree, random forest, SVM (RBF, polynomial, and linear kernels), linear regression, logistic regression. 
+- Before selecting your choice of machine learning algorithm to use with RFEST, it would be wise to run a set of general machine learning methods such as the following: decision tree, random forest, SVM (RBF, polynomial, and linear kernels), linear regression, logistic regression. 
 - Recall that RFEST was written with the programming language R and the baseline methods and final CV for RFEST were implemented in Python. This should not be a big concern.
 
 Post-hoc Analysis:
 If you are interested in pairwise interactions, I've uploaded a script called *LinearSVMFinalAnalysis.R*. Using a linear SVM, this will compute a ranking of the individual features and their interaction pairs. 
 
-Note that you will probably need to change the variables **listOfFeatures** and **file** in your implementation. 
+Note that you will probably need to change the variables **listOfFeatures** and **file** in your implementation of *LinearSVMFinalAnalysis.R*. 
 
 To read more on RFEST, visit this [link](https://escanillans.github.io/ResearchPapers/rfest.pdf).
 
