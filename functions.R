@@ -1,5 +1,5 @@
-# This function creates numFolds folds for use in
-# cross validation with stratified sampling.
+# function performs stratified sampling and
+# returns numFolds folds.
 createFolds <- function(data, numFolds, seed)
 {
   set.seed(seed)
@@ -78,7 +78,7 @@ createFolds <- function(data, numFolds, seed)
   return(folds)
 }
 
-# create a function to change class labels into binary (0,1) encoding
+# function to change class labels into binary (0,1) encoding
 binaryData <- function(data){
   # record class label
   # Note: class label is typically placed in last column of dataset
@@ -97,7 +97,6 @@ binaryData <- function(data){
 }
 
 # RFEST Algorithm
-# Input:
 # Output: Final feature subset, run time
 RFEST_Features <- function(dataSet, percentRemoval, folds, foldNumber)
 {

@@ -13,7 +13,7 @@ RFEST can be summarized by the following steps:
 3. Remove a percent of those feature(s) based on the computed importance.
 4. Repeat until the stopping criterion is met.
 
-To begin, run *MainProgram.R* [source("MainProgram.R")]. To test how well the algorithm performed, we will compute a 10-fold cross validation (CV) using only the features returned by RFEST. Open python notebook *roc_curves.ipynb*. This notebook will perform 10-fold CV on three different algorithms:
+To begin, run *MainProgram.R* [source("MainProgram.R")]. This R program will output a subset of features it deems relevant. To test how well the algorithm performed, we will compute a 10-fold cross validation (CV) using only the features returned by RFEST. Open python notebook *roc_curves.ipynb*. This notebook will perform 10-fold CV on three different algorithms:
 1. Linear SVM built using your whole dataset.
 2. RBF SVM built using your whole dataset.
 2. Non-linear SVM (default is an RBF kernel) built using the subset of features returned by RFEST.
