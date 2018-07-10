@@ -65,7 +65,7 @@ dfInteractionWeights = data.frame(Features = row.names(interaction.weights), Wei
 row.names(dfInteractionWeights)  = NULL
 
 # remove X. from interaction pairs
-dfInteractionWeights$Features = gsub("X.", "", dfInteractionWeights$Features) 
+#dfInteractionWeights$Features = gsub("X.", "", dfInteractionWeights$Features) 
 
 # save csv
 write.csv(dfInteractionWeights,file="results/10PercentRemoval/interaction.weights.8020Split.csv")
@@ -73,7 +73,7 @@ write.csv(dfInteractionWeights,file="results/10PercentRemoval/interaction.weight
 # Order dfInteractionWeights by absolute value
 dfInteractionWeightsAbsVal = data.frame(Features = row.names(interaction.weights), WeightsAbsVal = abs(dfInteractionWeights$Weights))
 dfInteractionWeightsAbsVal = dfInteractionWeightsAbsVal[order(-dfInteractionWeightsAbsVal$WeightsAbsVal),]
-dfInteractionWeightsAbsVal$Features = gsub("X.", "", dfInteractionWeightsAbsVal$Features)
+#dfInteractionWeightsAbsVal$Features = gsub("X.", "", dfInteractionWeightsAbsVal$Features)
 write.csv(dfInteractionWeightsAbsVal, file = "results/10PercentRemoval/interaction.weights.abs.valinteraction.weights.8020Split.csv")
 cat("finished!", "\n")
 
