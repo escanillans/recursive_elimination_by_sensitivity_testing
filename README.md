@@ -5,7 +5,7 @@ Assumptions:
 1. Binary data (including class label).
 2. Data is clean, contains no missing values (e.g. NA, NaN), and is called *final_data.csv*.
 3. Class label is called **class_label** and is at the end of your dataset (i.e. it is the last column).
-4. Unless altered, this algorithm uses an support vector machine (SVM) with an RBF kernel.
+4. Unless altered, this algorithm uses a support vector machine (SVM) with an RBF kernel.
 
 RFEST can be summarized by the following steps:
 1. Train an SVM model and output an accuracy measurement, AUC.
