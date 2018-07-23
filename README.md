@@ -15,20 +15,16 @@ RFEST can be summarized by the following steps:
 
 To begin, you have the option to run a Jupyter notebook that contains a standard set of machine learning algorithms. This performs cross validation on your entire dataset using the following ML methods: decision tree, random forest, support vector machine (rbf, polynomial, and linear), linear regression, and logistic regression. The notebook is called *baseline_runs*.
 
-Then run *MainProgram.R* [source("MainProgram.R")]. This R program will output a subset of features it deems relevant. To test how well the algorithm performed, we will compute a 10-fold cross validation (CV) using only the features returned by RFEST. Open python notebook *roc_curves.ipynb*. This notebook will perform 10-fold CV on three different algorithms:
-1. Linear SVM built using your whole dataset.
-2. RBF SVM built using your whole dataset.
-2. Non-linear SVM (default is an RBF kernel) built using the subset of features returned by RFEST.
+Then run *main_program.py*. To test how well RFEST performs on your dataset, we compute a 10-fold cross validation (CV). The results will be saved as a list of AUCs, F1 scores, and ROC curves for each fold. We then split the data into an 80/20-split and perform RFEST again to get a final subset of features. 
 
 Parameters you can adjust:
-- **percents** (*MainProgram.R*) = percent of features you would like to remove at each iteration. Set as a list so that the program will output the results into separate files based on the percent(s) you have chosen. Note that you will need to manually create these folders prior to running or it will not be saved.
-- **seeds** (*MainProgram.R*) = random seeds. You may select more than one if you would like to see if there is a big discrepancy in results.
-- Stopping criteria (*functions.R*) = this parameter is set such that the algorithm stops when we get a 5% drop (search for **95** in algorithm) in AUC (i.e. in any particular iteration an AUC is computed and compared to the max AUC achieved thus far).
+- **percent** (*main_program.py*) = percent of features you would like to remove at each iteration. Set as a list so that the program will output the results into separate files based on the percent(s) you have chosen. Note that you will need to manually create these folders prior to running or it will not be saved.
+- Stopping criteria (*functions.R* and *main_program.py*) = this parameter is set such that the algorithm stops when we get a 5% drop (search for **95** or **0.95** in algorithm) in AUC (i.e. in any particular iteration an AUC is computed and compared to the max AUC achieved thus far).
 - **n_splits** (*roc_curves.ipynb*) = the number of folds for stratified CV.
 
-What is outputted in *results/xPercentRemoval* folder (where *x* is percent you chose) when you run *MainProgram.R*:
-1. AUC before breaking and runtime when performing RFEST on 80-20 split.
-2. List of features.
+What is outputted in *results/xPercentRemoval* folder (where *x* is percent you chose) when you run *main_program.py*:
+1. 10-fold CV.
+2. List of relevant features.
 
 What is outputted when you run *roc_curves.ipynb*:
 1. AUC for each model (from 10-fold CV).
@@ -38,13 +34,13 @@ What is outputted when you run *roc_curves.ipynb*:
 Data Provided:
 I have provided a dataset based on the Correlation Immune (CI) function of order two, known as the parity function. The dataset contains 50 features and 1000 instances. Two randomly chosen features were used to create the class label. 
 
-The goal is to see whether RFEST can detect what those features are. The results in the Python notebook shows the features and the CV results. Visit the link at the bottom to read more on CI functions.
+The goal is to see whether RFEST can detect what those features are. Visit the link at the bottom to read more on CI functions.
 
 Notes:
 - No extra tuning is done before the algorithm runs. Default parameters for the machine learning algorithms have been used. This can be changed accordingly.
 - RFEST is a generalized feature selection algorithm. Meaning that one can, in practice, use any machine learning algorithm for evaluating feature relevance (refer to paper for more details). 
 - Before selecting your choice of machine learning algorithm to use with RFEST, it would be wise to run a set of general machine learning methods such as the following: decision tree, random forest, SVM (RBF, polynomial, and linear kernels), linear regression, logistic regression. 
-- Recall that RFEST was written with the programming language R and the baseline methods and final CV for RFEST were implemented in Python. This should not be a big concern.
+- Note that some of the processes were written in R, but the bulk of the algorithm is written in Python. This should not be a big concern.
 
 Post-hoc Analysis:
 If you are interested in pairwise interactions, I've uploaded a script called *LinearSVMFinalAnalysis.R*. Using a linear SVM, this will compute a ranking of the individual features and their interaction pairs. 

@@ -44,6 +44,9 @@ def RFEST(skf, df_feature_data_complete, df_label_data, df_feature_names_complet
 
     fig = plt.figure(figsize=(10,8))
     
+    # initialize number of features to remove (by percent)
+    percent = 0.1
+
     count = 0
     
     # for each fold
@@ -138,7 +141,7 @@ def RFEST(skf, df_feature_data_complete, df_label_data, df_feature_names_complet
                 df_feature_data[tune_index, idx] = original_vec
                 
             # find smallest values (10% of total features thus far)
-            idx_to_delete = np.array(df_feature_names.nsmallest(int(np.ceil(.1*np.shape(df_feature_data)[1])), 
+            idx_to_delete = np.array(df_feature_names.nsmallest(int(np.ceil(percent*np.shape(df_feature_data)[1])), 
                                                           'feat_importance')['feat_index'])
             
             # save a copy of feature data in case the model breaks
@@ -193,7 +196,6 @@ def RFEST(skf, df_feature_data_complete, df_label_data, df_feature_names_complet
 # In: data, labels
 # Out: List of features
 def RFEST_features(df_feature_data_complete, df_label_data, df_feature_names_complete):
-    
     # initialize best and max AUCs
     best_auc = 0
     max_auc = 0
@@ -211,6 +213,9 @@ def RFEST_features(df_feature_data_complete, df_label_data, df_feature_names_com
     df_feature_data = df_feature_data_complete
     df_feature_names = df_feature_names_complete
     df_feature_names_final = df_feature_names_complete    
+      
+    # initialize number of features to remove (by percent)
+    percent = 0.1
         
     while True:
         # train and test model
@@ -254,7 +259,7 @@ def RFEST_features(df_feature_data_complete, df_label_data, df_feature_names_com
             df_feature_data[tune_index, idx] = original_vec
                 
         # find smallest values (10% of total features thus far)
-        idx_to_delete = np.array(df_feature_names.nsmallest(int(np.ceil(.1*np.shape(df_feature_data)[1])), 
+        idx_to_delete = np.array(df_feature_names.nsmallest(int(np.ceil(percent*np.shape(df_feature_data)[1])), 
                                                         'feat_importance')['feat_index'])
             
         # save a copy of features in case the model breaks
@@ -297,7 +302,7 @@ skf = StratifiedKFold(n_splits,random_state=1)
 skf.get_n_splits(df_feature_data,df_label_data)
 
 # compute CV for RFEST
-#print('Now computing AUC (CV) for RFEST')
+print('Now computing AUC (CV) for RFEST')
 RFEST(skf, df_feature_data, df_label_data, df_feature_names)
 
 # return list of relevant features
