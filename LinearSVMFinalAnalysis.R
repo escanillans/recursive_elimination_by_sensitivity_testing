@@ -12,10 +12,10 @@ set.seed(1)
 source("functions.R")
 
 # Load the set of features retained from RFEST 10% removal seed 1
-listOfFeatures = read.csv("results/10PercentRemoval/fsListOfFeaturesRFEST8020SplitSeed1.csv")
+listOfFeatures = read.csv("results/10PercentRemoval/fs_features_8020_split.csv")
 
 # Remove first column (i.e. feature number)
-listOfFeatures[,1] = NULL
+listOfFeatures[,1:2] = NULL
 
 # Load the complete dataset
 data = read.csv("data/cleanData/final_data.csv")
