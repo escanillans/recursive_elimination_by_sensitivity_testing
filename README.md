@@ -47,7 +47,7 @@ If you are interested in pairwise interactions, I've uploaded a script called *L
 
 Note that you will probably need to change the variables **listOfFeatures** and **file** in your implementation of *LinearSVMFinalAnalysis.R*. 
 
-To read more on RFEST, visit this [link](https://escanillans.github.io/ResearchPapers/rfest.pdf).
+To read more on RFEST, visit this [link](https://ieeexplore.ieee.org/document/8614039). 
 
 
 
